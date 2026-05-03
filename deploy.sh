@@ -14,8 +14,11 @@ if [ ! -d .git ]; then
 fi
 
 echo "==> 設定遠端..."
-git remote remove origin 2>/dev/null || true
-git remote add origin "$REPO_URL"
+if git remote get-url origin >/dev/null 2>&1; then
+  git remote set-url origin "$REPO_URL"
+else
+  git remote add origin "$REPO_URL"
+fi
 
 echo "==> 拉取現有 README..."
 git fetch origin main 2>/dev/null || true
