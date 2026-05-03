@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大人牛乳 30 天 12 支｜腳本全集</title>
+<style>
+  :root {
+    --primary: #6B4423;
+    --accent: #C8956D;
+    --light: #F5EDE3;
+    --border: #D4C4B0;
+    --text: #2A2018;
+    --muted: #7A6B5D;
+    --highlight: #FFF4E6;
+    --bg: #FBF7F1;
+    --card: #FFFFFF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.75;
+    font-size: 16px;
+  }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, #8B5A2E 100%);
+    color: #FFF8EC;
+    padding: 50px 24px 32px;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+  }
+  .header .subtitle {
+    font-size: 14px;
+    opacity: 0.85;
+    margin-bottom: 16px;
+  }
+  .header .links {
+    font-size: 13px;
+    margin-top: 12px;
+  }
+  .header .links a {
+    color: #FFD9A8;
+    text-decoration: underline;
+    margin: 0 8px;
+  }
+
+  /* Sticky nav */
+  .nav {
+    position: sticky;
+    top: 0;
+    background: rgba(251, 247, 241, 0.96);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+  }
+  .nav details { max-width: 880px; margin: 0 auto; }
+  .nav summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .nav summary::-webkit-details-marker { display: none; }
+  .nav .toc-label { font-size: 14px; font-weight: 600; color: var(--primary); }
+  .nav .toc-hint { font-size: 12px; color: var(--muted); flex: 1; }
+  .nav .toc-arrow { color: var(--accent); transition: transform 0.2s; }
+  .nav details[open] .toc-arrow { transform: rotate(180deg); }
+  .nav-body {
+    padding: 0 20px 14px;
+    display: flex; flex-direction: column; gap: 6px;
+    max-height: 60vh; overflow-y: auto;
+  }
+  .week-row {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  }
+  .week-label {
+    font-size: 11px; font-weight: 700; color: var(--muted);
+    letter-spacing: 0.05em; min-width: 78px;
+  }
+  .week-links { display: flex; flex-wrap: wrap; gap: 5px; flex: 1; }
+  .nav a {
+    display: inline-block;
+    padding: 5px 11px;
+    color: var(--primary);
+    text-decoration: none;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 500;
+    background: var(--light);
+  }
+  .nav a:hover { background: var(--accent); color: #FFF8EC; }
+
+  /* Main column */
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 50px 24px 100px;
+  }
+
+  /* Episode block */
+  .episode {
+    margin-bottom: 80px;
+    padding-bottom: 50px;
+    border-bottom: 2px dashed var(--border);
+  }
+  .episode:last-child { border-bottom: none; }
+  .ep-tag {
+    display: inline-block;
+    background: var(--primary);
+    color: #FFF8EC;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    letter-spacing: 0.05em;
+  }
+  .ep-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.3;
+    margin-bottom: 14px;
+  }
+  .ep-meta {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .ep-meta span {
+    background: var(--light);
+    padding: 3px 9px;
+    border-radius: 5px;
+  }
+  .ep-summary {
+    color: var(--muted);
+    font-size: 14.5px;
+    line-height: 1.7;
+    border-left: 3px solid var(--accent);
+    padding: 4px 0 4px 14px;
+    margin-bottom: 30px;
+  }
+
+  /* Section block (Hook / Story / Offer) */
+  .section {
+    margin-bottom: 28px;
+  }
+  .section-head {
+    display: flex; align-items: baseline; gap: 12px;
+    margin-bottom: 14px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-label {
+    background: var(--accent);
+    color: #FFF8EC;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 4px;
+    letter-spacing: 0.06em;
+  }
+  .section-time {
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .section-title {
+    font-size: 15px;
+    color: var(--primary);
+    font-weight: 600;
+  }
+
+  /* Field block */
+  .field {
+    margin-bottom: 14px;
+  }
+  .field-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 4px;
+    letter-spacing: 0.03em;
+  }
+  .field-value { font-size: 14.5px; line-height: 1.7; }
+  .field-value.scene { color: var(--text); }
+  .field-value.dialog {
+    background: var(--highlight);
+    border-left: 3px solid var(--accent);
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    line-height: 1.85;
+    white-space: pre-line;
+  }
+  .field-value.captions {
+    font-size: 13.5px;
+    color: var(--text);
+    line-height: 1.85;
+  }
+  .field-value.captions ul { list-style: none; padding: 0; }
+  .field-value.captions li {
+    padding: 2px 0;
+    position: relative;
+    padding-left: 12px;
+  }
+  .field-value.captions li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+  .field-value.captions strong { color: var(--primary); }
+
+  .note {
+    background: var(--light);
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+  .note::before {
+    content: "📝 ";
+    margin-right: 4px;
+  }
+
+  /* Threads box */
+  .threads {
+    margin-top: 30px;
+    background: var(--light);
+    border-radius: 10px;
+    padding: 18px 22px;
+  }
+  .threads-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--primary);
+    margin-bottom: 10px;
+  }
+  .threads-body {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--text);
+    white-space: pre-line;
+  }
+
+  /* Footer */
+  footer {
+    background: var(--primary);
+    color: #FFF8EC;
+    text-align: center;
+    padding: 40px 24px;
+    font-size: 13px;
+  }
+  footer a { color: #FFD9A8; }
+
+  @media (max-width: 720px) {
+    .header h1 { font-size: 22px; }
+    main { padding: 30px 16px 60px; }
+    .ep-title { font-size: 22px; }
+    .nav .toc-hint { display: none; }
+    .week-row { flex-direction: column; align-items: flex-start; gap: 4px; }
+    .week-label { min-width: 0; }
+  }
+
+  @media print {
+    .nav, .header .links, footer { display: none; }
+    .episode { break-inside: avoid; page-break-inside: avoid; }
+    body { background: white; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <h1>大人牛乳 30 天 12 支</h1>
+  <div class="subtitle">腳本全集（lock 版）</div>
+  <div class="links">
+    <a href="index.html">← 回分鏡對照表</a>
+    <a href="scripts/">📄 下載原始 markdown</a>
+  </div>
+</header>
+
+<nav class="nav">
+  <details id="nav-toc">
+    <summary>
+      <span class="toc-label">目錄｜12 支</span>
+      <span class="toc-hint">W1 立旗 · W2 圈粉 · W3 信任 · W4 收網</span>
+      <span class="toc-arrow">▾</span>
+    </summary>
+    <div class="nav-body">
+      <div class="week-row">
+        <div class="week-label">W1 立旗週</div>
+        <div class="week-links">
+          <a href="#ep01">#01 跟拿鐵根本一樣吧？</a>
+          <a href="#ep02">#02 戒奶茶 30 天</a>
+          <a href="#ep03">#03 在日本當外人的我</a>
+        </div>
+      </div>
+      <div class="week-row">
+        <div class="week-label">W2 圈粉週</div>
+        <div class="week-links">
+          <a href="#ep04">#04 比鮮奶茶適合早餐</a>
+          <a href="#ep05">#05 戒奶茶後喝這個</a>
+          <a href="#ep06">#06 比奶茶會放鬆</a>
+        </div>
+      </div>
+      <div class="week-row">
+        <div class="week-label">W3 信任週</div>
+        <div class="week-links">
+          <a href="#ep07">#07 奶精 vs 鮮乳</a>
+          <a href="#ep08">#08 鮮奶茶喝不出層次</a>
+          <a href="#ep09">#09 三個標準</a>
+        </div>
+      </div>
+      <div class="week-row">
+        <div class="week-label">W4 收網週</div>
+        <div class="week-links">
+          <a href="#ep10">#10 賣最久不是奶茶</a>
+          <a href="#ep11">#11 為什麼叫『大人』</a>
+          <a href="#ep12">#12 奶茶犒賞 vs 日常</a>
+        </div>
+      </div>
+    </div>
+  </details>
+</nav>
+
+<main>
+
+<!-- ========== #01 ========== -->
+<article class="episode" id="ep01">
+  <span class="ep-tag">W1 #01 · 44 秒</span>
+  <h2 class="ep-title">「咖啡牛乳跟拿鐵根本一樣吧？」</h2>
+  <div class="ep-meta">
+    <span>IG Reels 主推</span>
+    <span>支柱 A · 品類差異化</span>
+    <span>破除迷思系列 #01</span>
+    <span>奶茶關鍵字：拿鐵</span>
+    <span>CTA：留言「喝」+ 宅配免運券</span>
+  </div>
+  <div class="ep-summary">
+    日本散步 essay 風格——B-roll 街景襯底、字幕為主角、口播從背景輕輕說。把「咖啡牛乳跟拿鐵根本一樣」這個觀眾常問的問題當入口，用「比例 → 味道 → 加糖 → 一口接一口」四層論證回答「不一樣」，最後用留言互動 CTA 直接導流試喝。
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">標題</span><span class="section-time">0–1.5 秒</span><span class="section-title">主標卡</span></div>
+    <div class="field"><div class="field-value dialog">破除迷思 #01
+————————
+「咖啡牛乳跟拿鐵
+   根本一樣吧？」</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">HOOK</span><span class="section-time">1.5–5 秒</span><span class="section-title">直接矛盾</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">日本街道 POV 散步視角（地磚、影子、過路人模糊背景）。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">（背景音、像散步時自言自語）
+「很多人問我——」
+「咖啡牛乳跟拿鐵，根本一樣吧？」
+（停半拍）
+「差很多。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>1.5-3s：「咖啡牛乳 = 拿鐵？」（紅叉劃過）</li>
+      <li>3-4s：「<strong>差很多</strong>」</li>
+      <li>4-5s：「最違反直覺的差別 ↓」</li>
+    </ul></div></div>
+    <div class="note">用觀眾常問的疑問當 title，立刻反駁，建立「我等下要打你臉」的張力。</div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">STORY 1</span><span class="section-time">5–13 秒</span><span class="section-title">拿鐵段：奶味為什麼出不來</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">日本街頭咖啡廳玻璃櫥窗反射過路人，繼續走的腳步。<strong>不出現拿鐵實物</strong>，視覺焦點在字幕。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「拿鐵的奶比例 1:3。」
+「看起來奶很多。」
+「但 espresso 太強——」
+「把奶味全壓掉了。」
+「你喝下去——全是咖啡。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>5-7s：「拿鐵｜1:3（咖啡：奶）」</li>
+      <li>7-9s：「<strong>ESPRESSO 太強</strong>」</li>
+      <li>9-11s：「奶味 → 被壓掉」</li>
+      <li>11-13s：「<strong>你喝到的是咖啡，不是奶</strong>」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">STORY 2</span><span class="section-time">13–22 秒</span><span class="section-title">咖啡牛乳段：為什麼奶味出來了</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">前段（13-17 秒）日本自動販賣機特寫（玻璃瓶咖啡牛乳排在裡面）→ 後段（17-22 秒）日本神社參道或安靜巷弄漫步視角。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「咖啡牛乳沒有 espresso。」
+「用萃取咖啡，柔很多。」
+「奶才有空間出來——」
+「第一口奶香，第二口咖啡尾韻。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>13-15s：「咖啡牛乳｜1:1.5（咖啡：奶）」</li>
+      <li>15-17s：「沒有 espresso 壓迫」</li>
+      <li>17-19s：「<strong>第一口：奶香</strong>」</li>
+      <li>19-22s：「<strong>第二口：咖啡尾韻</strong>」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">STORY 3</span><span class="section-time">22–34 秒</span><span class="section-title">喝感對比 + 加糖原理 + 一口接一口</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">日本咖啡店外木桌：玻璃瓶大人牛乳 + 日式甜點 + 黃昏餘暉。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「喝起來呢——」
+「拿鐵：第一口是苦，奶泡擋住味道。」
+「咖啡牛乳：第一口是奶香，入口柔。」
+「日式咖啡牛乳通常會加一點糖。」
+「不是為了甜——是讓奶香跟咖啡香更立體。」
+「所以好的咖啡牛乳——」
+「會讓你一口接一口，一下子就喝完。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>22-24s：「<strong>喝起來怎麼差？</strong>」</li>
+      <li>24-26s：「拿鐵｜苦衝擊 + 奶泡擋住」</li>
+      <li>26-28s：「咖啡牛乳｜奶香入口 + 口感柔」</li>
+      <li>28-30s：「<strong>通常會加一點糖</strong>」</li>
+      <li>30-32s：「不是為了甜 → 是放大香氣」</li>
+      <li>32-34s：「<strong>一口接一口／一下子就喝完</strong>」（金句字幕，手寫感字體、慢淡入）</li>
+    </ul></div></div>
+    <div class="note">Story 3 是這集的論述弧高潮：對比 → 解釋（為什麼加糖）→ 結果（一口接一口）。「一口接一口」是消費者實際會講出來的話，截圖率高。</div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">OFFER</span><span class="section-time">34–44 秒</span><span class="section-title">呼應 title + 留言互動 CTA</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">黃昏日本街角，玻璃瓶大人牛乳擺在便利商店窗邊或長椅。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「所以——」
+「『跟拿鐵根本一樣吧？』」
+「我認真回答你：不一樣。」
+「是完全不同的兩杯飲料。」
+（停一拍）
+「想試喝大人牛乳嗎？」
+「留言『喝』——送你宅配免運券。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>34-36s：「『跟拿鐵根本一樣吧？』」（呼應 title 引號）</li>
+      <li>36-38s：「<strong>不一樣</strong>」（紅色大字）</li>
+      <li>38-40s：「<strong>是完全不同的兩杯飲料</strong>」</li>
+      <li>40-42s：「<strong>留言『喝』 → 宅配免運券</strong>」（CTA 飛入動畫）</li>
+      <li>42-44s：「破除迷思 #01」+「大人牛乳」logo</li>
+    </ul></div></div>
+    <div class="note">「留言『喝』」門檻極低（一個字），留言會推升 IG 演算法觸及。試喝免運券要先準備好：私訊／DM 自動回覆系統，或客服人工發送機制。</div>
+  </div>
+
+  <div class="threads">
+    <div class="threads-label">THREADS 配套貼文</div>
+    <div class="threads-body">「咖啡牛乳跟拿鐵根本一樣吧？」
+
+不一樣。是完全不同的兩杯飲料。
+
+拿鐵 1:3，espresso 太強，奶味全壓掉。
+咖啡牛乳 1:1.5，沒 espresso 壓迫，第一口就是奶香。
+
+加一點糖不是為了甜，是把奶香跟咖啡香放大。
+
+好的咖啡牛乳會讓你一口接一口，一下子就喝完。
+
+想試喝？留言「喝」，送你宅配免運券。
+
+破除迷思 #01</div>
+  </div>
+</article>
+
+<!-- ========== #02 ========== -->
+<article class="episode" id="ep02">
+  <span class="ep-tag">W1 #02 · 30 秒</span>
+  <h2 class="ep-title">「戒奶茶 30 天，發現的事比減肥更重要」</h2>
+  <div class="ep-meta">
+    <span>IG Reels 主推</span>
+    <span>支柱 B · 場景情感</span>
+    <span>30 天日常實驗系列 #01</span>
+    <span>奶茶關鍵字：戒奶茶</span>
+    <span>CTA：實驗訂閱型</span>
+  </div>
+  <div class="ep-summary">
+    先擊中觀眾痛點（你是不是這樣），再提供反直覺歸因（不是你的問題，是那杯飲料的問題），最後給解法 + 系列訂閱。「戒奶茶」直接搭奶茶話題流量，「比減肥更重要」製造好奇缺口。
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">標題</span><span class="section-time">0–1.5 秒</span><span class="section-title">主標卡</span></div>
+    <div class="field"><div class="field-value dialog">30 天日常實驗 #01
+————————
+戒奶茶 30 天
+發現的事比減肥更重要</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">HOOK</span><span class="section-time">0–5 秒</span><span class="section-title">痛點直擊</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">辦公室。下午 4 點時鐘特寫（拍出秒針的「滴答」聲）。鏡頭 pan 下，女主角臉趴在桌上。手邊有一杯只剩冰塊的奶茶。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">（女聲，平淡、像在描述一個再熟悉不過的事）
+「你下午四點就累 / 晚餐又吃不下 / 半夜還會嘴饞——」
+（停半拍）
+「你以為是工作太累？」</div></div>
+    <div class="note">前三句是觀眾的「對對對這就是我」，第四句是「你以為是 X，但其實不是」的反設置。</div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">STORY 1</span><span class="section-time">5–11 秒</span><span class="section-title">連鎖反應（6 個快剪）</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">每個 1 秒：奶茶最後一口 → 灌水 → 眼皮垂下 → 晚餐沒胃口 → 半夜冰箱 → 隔天鬧鐘按掉繼續睡。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「下午一杯奶茶。 / 四點犯睏。 / 晚餐沒胃口。 / 半夜嘴饞。 / 隔天又累。」</div></div>
+    <div class="note">每句口播配一個畫面，6 秒內看完整個「奶茶→隔天累」的循環，觀眾自我認知「對欸我也是這樣」。</div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">STORY 2</span><span class="section-time">11–15 秒</span><span class="section-title">揭示｜定格收回</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">所有快剪畫面收回，定格在一杯空了的奶茶杯。鏡頭慢慢推近。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「不是工作太累。」
+（停一拍）
+「是那杯奶茶 / 把你整天 / 都吃掉了。」</div></div>
+    <div class="note">把觀眾原本的歸因（工作累）抽走，換成新的歸因（那杯飲料）。觀眾這 4 秒會經歷「等等真的嗎」的腦內質疑——這個質疑就是讓他繼續看下去的動力。</div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">STORY 3</span><span class="section-time">15–22 秒</span><span class="section-title">解法｜我替你試了</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">同樣的辦公桌但桌上是大人牛乳玻璃瓶。她從容打開、倒出、喝一口。4 點時鐘畫面（呼應 Hook），但這次她沒趴下還在打字。晚餐桌上她吃得開心。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「我換了一杯。 / 30 天。」
+（停一拍）
+「不口渴。 / 不犯睏。 / 晚餐胃口回來了。」</div></div>
+    <div class="note">前 15 秒講「你」，現在講「我」——觀眾會有「她替我做了我該做的事」的代入感。</div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">OFFER</span><span class="section-time">22–30 秒</span><span class="section-title">實驗訂閱 CTA</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">女主角坐在窗邊，桌上玻璃瓶。手機放在桌上正面朝下。她看著窗外，慢慢喝一口。鏡頭從玻璃瓶 pan up 到她平靜的臉。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「下午 / 只是第一個問題。」
+（停一拍）
+「還有 29 個 / 我在替你解決。」
+（停一拍）
+「追蹤我，看下一個。」</div></div>
+    <div class="note">「我在替你解決」——把品牌定位為「服務者」不是「實驗者」。觀眾感覺「她在替我想」不是「她跟我炫耀」。</div>
+  </div>
+
+  <div class="threads">
+    <div class="threads-label">THREADS 配套貼文</div>
+    <div class="threads-body">你下午四點就累、晚餐又吃不下、半夜還會嘴饞——你一直以為是工作太累。
+
+我也以為。直到我把下午那杯奶茶換掉。30 天後，我下班還想做點事情。
+
+不是你的問題。是那杯飲料的問題。
+
+30 天日常實驗 #01／30，繼續分享。</div>
+  </div>
+</article>
+
+<!-- ========== #03 ========== -->
+<article class="episode" id="ep03">
+  <span class="ep-tag">W1 #03 · 60 秒</span>
+  <h2 class="ep-title">「在日本當外人的那個我」</h2>
+  <div class="ep-meta">
+    <span>IG Reels 主推</span>
+    <span>支柱 A + B</span>
+    <span>情感重建</span>
+    <span>純情感片</span>
+    <span>CTA：情感歸屬型</span>
+  </div>
+  <div class="ep-summary">
+    用觀眾自己對日本的記憶，把「日式咖啡牛乳」重建為情感符號。鏡頭 9 機場最後一瓶是全片靈魂。「我想念的不是日本，是在日本當外人的那個我」是金句。
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">HOOK</span><span class="section-time">0–11 秒</span><span class="section-title">日本人的咖啡牛乳</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">片頭（0-3 秒）：純黑底，奶白色字卡淡入「對日本人來說，這只是一瓶飲料。」｜OL 通勤（3-7 秒）：日本電車車廂，OL 戴耳機站著，手裡咖啡牛乳，下車。字卡「東京 / 早上 8:32」｜京都高中生（7-11 秒）：放學街頭，一個女學生邊走邊喝，喝完隨手丟回收桶，她沒回頭。字卡「京都 / 下午 4:45」</div></div>
+    <div class="field"><div class="field-label">配樂</div><div class="field-value scene">極輕的日系氛圍鋼琴從 0 秒淡入。</div></div>
+    <div class="note">「她沒回頭」這個細節是神來一筆，建議鏡頭多停 0.5 秒。</div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">轉場</span><span class="section-time">11–16 秒</span><span class="section-title">拋問</span></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">（女聲，輕、像自言自語）
+「對他們來說 / 這只是一瓶咖啡牛乳。」
+（字卡停 1 秒）
+「但對你來說呢？」</div></div>
+    <div class="note">這四個字會讓觀眾自動進入回憶模式。字幕至少停 1.5 秒讓觀眾消化。</div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">STORY</span><span class="section-time">16–36 秒</span><span class="section-title">台灣人在日本（觀光客版）</span></div>
+    <div class="field"><div class="field-label">畫面（同一女主角）</div><div class="field-value scene"><strong>便利商店外（16-21 秒）：</strong>背大後背包、紙袋、地圖摺頁，靠牆吃飯糰配咖啡牛乳。
+<strong>民宿早晨（21-26 秒）：</strong>剛起床、浴衣、行程表、筆記本，坐窗邊看小街，沒在做行程。
+<strong>公園長椅（26-31 秒）：</strong>運動鞋、後背包、購物袋，閉眼曬太陽，旁邊有流浪貓。
+<strong>機場最後一瓶 ★ 全片靈魂（31-36 秒）：</strong>厚外套、行李箱、登機證，販賣機前剛買咖啡牛乳，看登機證、看時間、慢慢喝、閉眼一秒。</div></div>
+    <div class="field"><div class="field-label">旁白</div><div class="field-value dialog">「在日本 / 你會站在便利商店外面 / 慢慢吃完一個飯糰。」
+「在日本 / 你願意花 30 分鐘 / 什麼都不做。」
+「在日本 / 你會在公園的長椅上 / 坐 10 分鐘什麼都不做。」
+「在日本 / 你會在離開前 / 多買一瓶。」
+（停一拍）
+「就為了再多 5 分鐘 / 不是自己。」</div></div>
+    <div class="note">「不是自己」雙關：第一層 = 不是平常的我（觀光客的我）；第二層（看到結尾才懂）= 不是那個沒空慢下來的自己（=真正的自己）。</div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">揭示</span><span class="section-time">36–48 秒</span><span class="section-title">真正的揭示</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">HARD CUT 到台灣街頭。同一個女生但截然不同：手搖飲、提小包、上班襯衫、高跟鞋、邊走邊講電話、走得快。然後她停下，沒接電話，走進便利商店，看到冰櫃裡的大人牛乳，拿起來。</div></div>
+    <div class="field"><div class="field-label">旁白</div><div class="field-value dialog">「我以為 / 我想念的是日本。」
+（hard cut）
+「後來我才發現 / 我想念的不是日本 / 是在日本當外人的那個我。」
+（停 1 秒）
+「那個有藉口慢下來的我。」</div></div>
+    <div class="note">「當外人」三個字：把「日本旅遊的奢侈」精準定義成「身份的奢侈」。「有藉口」三個字：戳爆所有都會人——我們都知道我們想慢下來，但我們沒有藉口。</div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">OFFER</span><span class="section-time">48–60 秒</span><span class="section-title">現在的瞬間 + Follow Trigger</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">女生坐在台灣某個窗邊。手裡是大人牛乳。手機放在桌上正面朝下。她看著窗外，慢慢喝一口。表情跟在日本那幾個鏡頭一樣——安靜、放鬆、自在。最後 6 秒黑底字卡依序淡入。</div></div>
+    <div class="field"><div class="field-label">旁白 + 字卡</div><div class="field-value dialog">「現在 / 我不用買機票 / 也可以給自己一個藉口。」
+
+「日式咖啡牛乳。」
+「你不用去日本，也可以慢下來。」
+（停一拍）
+「如果你也想念那個 / 有藉口慢下來的自己——」
+「追蹤我們。」
+「我們會繼續替你保留那個時刻。」
+
+大人牛乳 logo</div></div>
+    <div class="note">從品牌主張（你不用去日本）→ 認同呼喚（如果你也想念）→ 行動指令（追蹤）→ 承諾（替你保留）。一氣呵成，6 秒完成情感歸屬型 follow trigger。</div>
+  </div>
+</article>
+
+<!-- ========== #04 ========== -->
+<article class="episode" id="ep04">
+  <span class="ep-tag">W2 #04 · 30 秒</span>
+  <h2 class="ep-title">「比鮮奶茶還適合早餐的那一杯」</h2>
+  <div class="ep-meta">
+    <span>IG Reels 主推</span>
+    <span>支柱 B · 場景情感</span>
+    <span>30 天日常實驗 #02</span>
+    <span>奶茶關鍵字：鮮奶茶</span>
+    <span>CTA：實驗訂閱型</span>
+  </div>
+  <div class="ep-summary">
+    把日式咖啡牛乳定位為「升級早餐到日式喫茶店感」的飲料。同樣的吐司+蛋，配豆漿是早餐店、配鮮奶茶還是早餐店，配日式咖啡牛乳就升級成喫茶店感。
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">標題</span><span class="section-time">0–1.5 秒</span><span class="section-title">主標卡</span></div>
+    <div class="field"><div class="field-value dialog">30 天日常實驗 #02
+————————
+比鮮奶茶
+還適合早餐的那一杯</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">HOOK</span><span class="section-time">1.5–5 秒</span><span class="section-title">日式餐桌起手</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">日式餐桌（磚牆背景、木質吧台、自然光），同一份早餐 + 三種飲料快閃輪播。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「從早餐店升級到日式喫茶店——」
+「只差這一杯。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>1.5-3s：「早餐店 → 喫茶店」</li>
+      <li>3-5s：「<strong>只差一杯</strong>」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">STORY 1</span><span class="section-time">5–12 秒</span><span class="section-title">對比展示</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">同一份早餐（吐司、蛋、水果）三個版本快剪。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「同樣的吐司、同樣的蛋——」
+「配的飲料不同，整個早餐就不一樣。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>5-7s：「配豆漿 → 早餐店」</li>
+      <li>7-9s：「配鮮奶茶 → 還是早餐店」</li>
+      <li>9-12s：「<strong>配日式咖啡牛乳 → 喫茶店</strong>」</li>
+    </ul></div></div>
+    <div class="note">把「鮮奶茶」放在中間做對比，點出鮮奶茶比豆漿好但仍不夠升級——日式咖啡牛乳才是。</div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">STORY 2</span><span class="section-time">12–22 秒</span><span class="section-title">為什麼會升級</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">早餐桌特寫，玻璃瓶倒進杯、配著吐司咬一口。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「奶香 + 咖啡香 + 微糖。」
+「跟麵包、蛋、水果都對味。」
+「玻璃瓶開瓶那聲『啵』——」
+「讓早餐多了一個儀式。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>12-14s：「奶香 + 咖啡香 + 微糖」</li>
+      <li>14-16s：「<strong>跟所有早餐主食都搭</strong>」</li>
+      <li>16-19s：「玻璃瓶開瓶 → 儀式感」</li>
+      <li>19-22s：「<strong>早餐多了一個鏡頭</strong>」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">OFFER</span><span class="section-time">22–30 秒</span><span class="section-title">系列訂閱</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">早餐桌 wide shot，自然光、玻璃瓶在桌邊。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「升級早餐——」
+「不用換餐廳，換一杯就好。」
+「這只是 30 個升級裡的第一個。」
+「追蹤我，看下一個。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>22-24s：「<strong>升級早餐 = 換一杯</strong>」</li>
+      <li>24-26s：「在家就有」</li>
+      <li>26-28s：「30 個升級 / 第一個」</li>
+      <li>28-30s：「30 天日常實驗 #02／30」+「大人牛乳」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="threads">
+    <div class="threads-label">THREADS 配套貼文</div>
+    <div class="threads-body">比鮮奶茶還適合早餐的那一杯——是什麼？
+
+同樣的吐司、同樣的蛋。配豆漿是早餐店、配鮮奶茶還是早餐店、配日式咖啡牛乳就變喫茶店。
+
+奶香 + 咖啡香 + 微糖，跟麵包、蛋、水果都對味。
+玻璃瓶開瓶那聲「啵」，讓早餐多了一個儀式。
+
+升級早餐不需要換餐廳。換一杯，在家就有。
+
+30 天日常實驗 #02／30，繼續分享。</div>
+  </div>
+</article>
+
+<!-- ========== #05 ========== -->
+<article class="episode" id="ep05">
+  <span class="ep-tag">W2 #05 · 30 秒</span>
+  <h2 class="ep-title">「戒奶茶之後，我下午都喝這個」</h2>
+  <div class="ep-meta">
+    <span>IG Reels 主推</span>
+    <span>支柱 A · 品類差異化</span>
+    <span>破除迷思 #02</span>
+    <span>奶茶關鍵字：戒奶茶</span>
+    <span>CTA：留言「下午」+ 免運券</span>
+  </div>
+  <div class="ep-summary">
+    直接搭 #02「戒奶茶 30 天」的下半場——告訴觀眾戒掉之後喝什麼。連載感強。「下午茶不是只有奶茶或咖啡」第三選項揭示。
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">標題</span><span class="section-time">0–1.5 秒</span><span class="section-title">主標卡</span></div>
+    <div class="field"><div class="field-value dialog">破除迷思 #02
+————————
+戒奶茶之後
+我下午都喝這個</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">HOOK</span><span class="section-time">1.5–5 秒</span><span class="section-title">連結 #02 + 拋問</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">辦公室下午景（時鐘 14:30、群組訊息「要不要團購」、同事打字）。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「上次我說我戒了下午奶茶——」
+「很多人問：那你下午喝什麼？」
+（停一拍）
+「就喝這個。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>1.5-3s：「下午 14:30｜戒奶茶後」</li>
+      <li>3-5s：「<strong>那喝什麼？</strong>」</li>
+    </ul></div></div>
+    <div class="note">直接連結 #02「戒奶茶」內容，建立連載感。觀眾若看過 #02 會自然點進這支。</div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">STORY 1</span><span class="section-time">5–13 秒</span><span class="section-title">兩個選項都有副作用</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">奶茶杯特寫 → 黑咖啡杯特寫切換。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「奶茶——糖太多、會口渴。晚餐還沒胃口。」
+「咖啡——心悸、手抖。晚上會睡不著。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>5-9s：「奶茶｜糖多 / 口渴 / 晚餐沒胃口」</li>
+      <li>9-13s：「咖啡｜心悸 / 手抖 / 失眠」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">STORY 2</span><span class="section-time">13–22 秒</span><span class="section-title">第三選項</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">玻璃瓶大人牛乳特寫，倒進杯、女主角喝一口。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「日式咖啡牛乳——」
+「糖少、奶香飽足、咖啡因適中。」
+「不口渴。不心悸。不失眠。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>13-15s：「<strong>第三杯：日式咖啡牛乳</strong>」</li>
+      <li>15-17s：「糖少 / 飽足 / 咖啡因適中」</li>
+      <li>17-19s：「<strong>不口渴</strong>」</li>
+      <li>19-21s：「<strong>不心悸</strong>」</li>
+      <li>21-22s：「<strong>不失眠</strong>」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">OFFER</span><span class="section-time">22–30 秒</span><span class="section-title">留言互動 CTA</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">辦公桌玻璃瓶 + 下午自然光。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「下次下午——」
+「不要再被奶茶或咖啡綁住。」
+「想試喝大人牛乳嗎？」
+「留言『下午』——送你宅配免運券。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>22-24s：「<strong>下午不只有兩個答案</strong>」</li>
+      <li>24-26s：「<strong>第三杯，你還沒試</strong>」</li>
+      <li>26-28s：「<strong>留言『下午』 → 宅配免運券</strong>」</li>
+      <li>28-30s：「破除迷思 #02」+「大人牛乳」</li>
+    </ul></div></div>
+    <div class="note">「下午」這個留言詞比 #01 的「喝」更具體，跟內容主題綁在一起，留言質量會更高。</div>
+  </div>
+
+  <div class="threads">
+    <div class="threads-label">THREADS 配套貼文</div>
+    <div class="threads-body">上次我說我戒了下午奶茶。很多人問：那下午喝什麼？
+
+不是黑咖啡（心悸、失眠），不是無糖綠（沒滋味）。
+
+第三杯——日式咖啡牛乳。
+糖少、奶香飽足、咖啡因適中。不口渴、不心悸、不失眠。
+
+想試試嗎？留言「下午」，送你宅配免運券。
+
+破除迷思 #02</div>
+  </div>
+</article>
+
+<!-- ========== #06 ========== -->
+<article class="episode" id="ep06">
+  <span class="ep-tag">W2 #06 · 30 秒</span>
+  <h2 class="ep-title">「下班想喝奶茶？這杯比奶茶更會放鬆」</h2>
+  <div class="ep-meta">
+    <span>IG Reels 主推</span>
+    <span>支柱 B · 場景情感</span>
+    <span>30 天日常實驗 #03</span>
+    <span>奶茶關鍵字：奶茶</span>
+    <span>CTA：實驗訂閱型</span>
+  </div>
+  <div class="ep-summary">
+    把日式咖啡牛乳定位成「下班 5 分鐘換檔儀式」。比奶茶更能讓你真的放鬆（沒罪惡、沒糖過量），比酒更安全（不會醉、明天不毀），比咖啡更不衝（晚上不失眠）。
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">標題</span><span class="section-time">0–1.5 秒</span><span class="section-title">主標卡</span></div>
+    <div class="field"><div class="field-value dialog">30 天日常實驗 #03
+————————
+下班想喝奶茶？
+這杯比奶茶更會放鬆</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">HOOK</span><span class="section-time">1.5–5 秒</span><span class="section-title">下班場景 + 痛點</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">下班場景（捷運窗外天黑、家門口插鑰匙、進門那一秒）。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「下班想喝點東西——」
+「奶茶？酒？」
+（停一拍）
+「兩個都不會讓你放鬆。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>1.5-3s：「下班 19:00」</li>
+      <li>3-4s：「奶茶 / 酒」</li>
+      <li>4-5s：「<strong>都不會放鬆</strong>」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">STORY 1</span><span class="section-time">5–13 秒</span><span class="section-title">為什麼酒、奶茶、咖啡都不對</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">外送奶茶杯、啤酒罐、黑咖啡杯快剪。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「奶茶——糖太多、罪惡感。」
+「酒——會醉、宿醉、明天毀掉。」
+「黑咖啡——晚上失眠。」
+「都讓你不能 5 分鐘喘息。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>5-7s：「奶茶｜甜 / 罪惡」</li>
+      <li>7-9s：「酒｜醉 / 宿醉」</li>
+      <li>9-11s：「咖啡｜失眠」</li>
+      <li>11-13s：「<strong>都不適合下班 5 分鐘</strong>」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">STORY 2</span><span class="section-time">13–22 秒</span><span class="section-title">換檔儀式</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">玻璃瓶開瓶（ASMR「啵」）、倒進透明杯、坐下喝、夜色窗外。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「日式咖啡牛乳——」
+「有儀式感，但不會醉。」
+「微糖讓你放鬆，但不甜膩。」
+「咖啡因低，晚上不影響睡眠。」
+「5 分鐘——把工作模式換掉。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>13-15s：「<strong>日式咖啡牛乳</strong>」</li>
+      <li>15-17s：「有儀式 / 不醉」</li>
+      <li>17-19s：「放鬆 / 不甜膩」</li>
+      <li>19-22s：「<strong>5 分鐘 = 換檔</strong>」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">OFFER</span><span class="section-time">22–30 秒</span><span class="section-title">系列訂閱</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">夜晚窗邊（空玻璃瓶、女主角站起來做別的事的剪影：運動墊、書桌、廚房擇一）。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「下班不是夜晚的開始——」
+「是白天的收尾。」
+「還有 27 個習慣 / 我在一個一個換。」
+「追蹤我，看下一個。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>22-24s：「<strong>下班 = 換檔，不是放縱</strong>」</li>
+      <li>24-26s：「5 分鐘儀式」</li>
+      <li>26-28s：「30 個習慣 / 第三個」</li>
+      <li>28-30s：「30 天日常實驗 #03／30」+「大人牛乳」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="threads">
+    <div class="threads-label">THREADS 配套貼文</div>
+    <div class="threads-body">下班想喝奶茶嗎？我以前也是。
+
+但奶茶會讓我有罪惡感、糖太多、晚餐沒胃口。
+
+後來我換了一杯——日式咖啡牛乳。有儀式感（玻璃瓶、倒入、坐下），但不會醉。微糖讓我放鬆，但不甜膩。咖啡因低，晚上不影響睡眠。
+
+5 分鐘 = 把工作模式換掉。
+
+下班不是夜晚的開始，是白天的收尾。
+
+30 天日常實驗 #03／30，繼續分享。</div>
+  </div>
+</article>
+
+<!-- ========== #07 ========== -->
+<article class="episode" id="ep07">
+  <span class="ep-tag">W3 #07 · 30 秒</span>
+  <h2 class="ep-title">「奶精 vs 花蓮鮮乳——你的飲料用哪個？」</h2>
+  <div class="ep-meta">
+    <span>IG Reels 主推</span>
+    <span>支柱 C · 信任建立</span>
+    <span>奶茶關鍵字：奶精、鮮乳</span>
+    <span>CTA：留言「鮮乳」+ 免運券</span>
+  </div>
+  <div class="ep-summary">
+    用「奶精 vs 鮮乳」這個觀眾本來就有戒心的話題切入，把大人牛乳的乳源來源（花蓮鮮乳）變成可信任的證據。揭露型內容。
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">標題</span><span class="section-time">0–1.5 秒</span><span class="section-title">主標卡</span></div>
+    <div class="field"><div class="field-value dialog">信任建立 #01
+————————
+奶精 vs 花蓮鮮乳
+你的飲料用哪個？</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">HOOK</span><span class="section-time">1.5–5 秒</span><span class="section-title">手搖店場景</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">手搖店招牌、奶茶杯、便利商店冷藏架（3 個快剪）。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「你下午喝的那杯奶茶——」
+「裡面是奶精，還是鮮乳？」
+（停一拍）
+「你猜得到嗎？」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>1.5-3s：「奶精 / 鮮乳？」</li>
+      <li>3-5s：「<strong>你猜得到嗎？</strong>」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">STORY 1</span><span class="section-time">5–13 秒</span><span class="section-title">奶精的真相</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">奶精包裝特寫 → 成分表 → 反式脂肪等字眼。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「奶精——」
+「成分是植物油 + 添加物。」
+「便宜、保存久、口感濃稠。」
+「但跟『奶』本身——」
+「沒什麼關係。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>5-7s：「奶精｜植物油 + 添加物」</li>
+      <li>7-9s：「便宜 / 保存久 / 濃稠」</li>
+      <li>9-13s：「<strong>跟「奶」沒什麼關係</strong>」</li>
+    </ul></div></div>
+    <div class="note">不要直接攻擊特定品牌或妖魔化奶精，講事實就好。觀眾會自己連結到他們喝過的東西。</div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">STORY 2</span><span class="section-time">13–22 秒</span><span class="section-title">花蓮鮮乳的選擇</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">花蓮牧場、鮮乳倒進玻璃瓶、玻璃瓶大人牛乳特寫。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「大人牛乳——」
+「用花蓮的鮮乳。」
+「直送、72 小時內入瓶、冷藏配送。」
+「沒有奶精。」
+「沒有植物油。」
+「就是鮮乳。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>13-15s：「<strong>花蓮鮮乳</strong>」</li>
+      <li>15-17s：「直送 / 72 小時 / 冷藏」</li>
+      <li>17-19s：「<strong>沒有奶精</strong>」</li>
+      <li>19-21s：「<strong>沒有植物油</strong>」</li>
+      <li>21-22s：「<strong>就是鮮乳</strong>」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">OFFER</span><span class="section-time">22–30 秒</span><span class="section-title">留言互動 CTA</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">玻璃瓶倒進杯，分層線清晰可見。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「飲料的『奶』——」
+「差別比你以為的大。」
+「下次喝飲料前——」
+「先看一下標籤。」
+「想喝鮮乳調的咖啡牛乳？」
+「留言『鮮乳』——送你宅配免運券。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>22-24s：「<strong>飲料的「奶」差別大</strong>」</li>
+      <li>24-26s：「下次先看標籤」</li>
+      <li>26-28s：「<strong>留言『鮮乳』 → 宅配免運券</strong>」</li>
+      <li>28-30s：「信任建立 #01」+「大人牛乳」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="threads">
+    <div class="threads-label">THREADS 配套貼文</div>
+    <div class="threads-body">你下午喝的那杯奶茶，裡面是奶精還是鮮乳？
+
+奶精＝植物油 + 添加物。便宜、保存久、口感濃稠。但跟「奶」本身沒什麼關係。
+
+大人牛乳用花蓮的鮮乳。直送、72 小時內入瓶、冷藏配送。沒有奶精、沒有植物油，就是鮮乳。
+
+飲料的「奶」，差別比你以為的大。
+
+想喝鮮乳調的咖啡牛乳？留言「鮮乳」，送你宅配免運券。
+
+信任建立 #01</div>
+  </div>
+</article>
+
+<!-- ========== #08 ========== -->
+<article class="episode" id="ep08">
+  <span class="ep-tag">W3 #08 · 30 秒</span>
+  <h2 class="ep-title">「鮮奶茶喝不出層次，這杯第二口才是重點」</h2>
+  <div class="ep-meta">
+    <span>IG Reels 主推</span>
+    <span>支柱 A · 品味方法</span>
+    <span>奶茶關鍵字：鮮奶茶</span>
+    <span>CTA：信任型（追蹤學品味）</span>
+  </div>
+  <div class="ep-summary">
+    把「品味方法」當差異化武器——鮮奶茶喝法很簡單（甜在前面、不會變化），但日式咖啡牛乳的層次需要喝兩口才能感受到。教觀眾怎麼喝。
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">標題</span><span class="section-time">0–1.5 秒</span><span class="section-title">主標卡</span></div>
+    <div class="field"><div class="field-value dialog">信任建立 #02
+————————
+鮮奶茶喝不出層次
+這杯第二口才是重點</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">HOOK</span><span class="section-time">1.5–5 秒</span><span class="section-title">並排對比</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">鮮奶茶杯特寫 → 玻璃瓶大人牛乳特寫。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「鮮奶茶——」
+「喝幾口都一個味道。」
+（停一拍）
+「日式咖啡牛乳不一樣。」
+「第二口才是重點。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>1.5-3s：「鮮奶茶｜一個味道」</li>
+      <li>3-5s：「<strong>日式咖啡牛乳｜第二口才是重點</strong>」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">STORY 1</span><span class="section-time">5–12 秒</span><span class="section-title">鮮奶茶為什麼一個味道</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">鮮奶茶杯特寫，糖漿沉底、攪拌、吸管喝。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「鮮奶茶——」
+「糖在前面，奶在中間。」
+「攪一攪，全部混在一起。」
+「喝起來——很順口。」
+「但每一口，都是同一個味道。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>5-7s：「鮮奶茶｜糖 + 奶 + 茶」</li>
+      <li>7-9s：「攪一攪 → 混在一起」</li>
+      <li>9-12s：「<strong>每一口都一樣</strong>」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">STORY 2</span><span class="section-time">12–22 秒</span><span class="section-title">日式咖啡牛乳的兩口</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">玻璃瓶倒進透明杯，分層清晰。女主角喝第一口、停一秒、再喝第二口。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「日式咖啡牛乳——」
+「奶跟咖啡是分層的。」
+「第一口——」
+「先喝到的是奶香。」
+「第二口——」
+「咖啡的尾韻才浮上來。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>12-14s：「<strong>奶 / 咖啡是分層的</strong>」</li>
+      <li>14-17s：「<strong>第一口：奶香</strong>」</li>
+      <li>17-22s：「<strong>第二口：咖啡尾韻</strong>」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">OFFER</span><span class="section-time">22–30 秒</span><span class="section-title">追蹤學品味</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">女主角放下杯子，平靜表情。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「好飲料的味道——」
+「要慢慢喝才聽得到。」
+（停一拍）
+「下次喝大人牛乳——」
+「記得喝兩口。」
+「追蹤我，繼續學。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>22-24s：「<strong>好飲料 = 慢慢喝才聽得到</strong>」</li>
+      <li>24-26s：「下次喝兩口」</li>
+      <li>26-28s：「追蹤我，繼續學」</li>
+      <li>28-30s：「信任建立 #02」+「大人牛乳」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="threads">
+    <div class="threads-label">THREADS 配套貼文</div>
+    <div class="threads-body">鮮奶茶——糖在前面、奶在中間，攪一攪混在一起，每一口都一樣。
+
+日式咖啡牛乳——奶跟咖啡是分層的。
+
+第一口先喝到奶香。
+第二口咖啡尾韻才浮上來。
+
+好飲料的味道，要慢慢喝才聽得到。
+
+下次喝大人牛乳，記得喝兩口。
+
+信任建立 #02</div>
+  </div>
+</article>
+
+<!-- ========== #09 ========== -->
+<article class="episode" id="ep09">
+  <span class="ep-tag">W3 #09 · 30 秒</span>
+  <h2 class="ep-title">「比鮮奶茶不甜、比拿鐵不苦——日式咖啡牛乳的三個標準」</h2>
+  <div class="ep-meta">
+    <span>IG Reels + Threads 雙軌</span>
+    <span>支柱 A · 品類規格</span>
+    <span>破除迷思 #03</span>
+    <span>奶茶關鍵字：鮮奶茶、拿鐵</span>
+    <span>CTA：系列承諾型</span>
+  </div>
+  <div class="ep-summary">
+    直接定義品類規格——日式咖啡牛乳的三個必要條件。一旦這個 mental category 建立，後面所有競品都會被觀眾用這把尺去量。
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">標題</span><span class="section-time">0–1.5 秒</span><span class="section-title">主標卡</span></div>
+    <div class="field"><div class="field-value dialog">破除迷思 #03
+————————
+比鮮奶茶不甜
+比拿鐵不苦
+日式咖啡牛乳的三個標準</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">HOOK</span><span class="section-time">1.5–5 秒</span><span class="section-title">三杯對比</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">黑底白字主標 → 三杯飲料並排（鮮奶茶 / 拿鐵 / 玻璃瓶大人牛乳）。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「日式咖啡牛乳——」
+「跟鮮奶茶不一樣，跟拿鐵也不一樣。」
+「它有三個標準。」
+「通不過的——」
+「都不算日式咖啡牛乳。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>1.5-3s：「不是鮮奶茶 / 不是拿鐵」</li>
+      <li>3-5s：「<strong>它有三個標準</strong>」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">STORY</span><span class="section-time">5–22 秒</span><span class="section-title">三個標準</span></div>
+    <div class="field"><div class="field-label">口播｜標準一（5-10 秒）</div><div class="field-value dialog">「第一——不甜。」
+「比鮮奶茶不甜。」
+「糖只放夠『放大香氣』，不放更多。」</div></div>
+    <div class="field"><div class="field-label">口播｜標準二（10-15 秒）</div><div class="field-value dialog">「第二——不苦。」
+「比拿鐵不苦。」
+「用萃取咖啡，不是 espresso。」</div></div>
+    <div class="field"><div class="field-label">口播｜標準三（15-22 秒）</div><div class="field-value dialog">「第三——不澀。」
+「奶要鮮乳、咖啡要好豆。」
+「喝完——嘴裡是乾淨的。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>5-7s：「<strong>標準一｜不甜</strong>（vs 鮮奶茶）」</li>
+      <li>7-10s：「糖 = 放大香氣，不是甜味」</li>
+      <li>10-12s：「<strong>標準二｜不苦</strong>（vs 拿鐵）」</li>
+      <li>12-15s：「萃取咖啡，不是 espresso」</li>
+      <li>15-17s：「<strong>標準三｜不澀</strong>」</li>
+      <li>17-19s：「鮮乳 + 好豆」</li>
+      <li>19-22s：「<strong>喝完嘴裡是乾淨的</strong>」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">OFFER</span><span class="section-time">22–30 秒</span><span class="section-title">系列承諾</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">玻璃瓶大人牛乳特寫 + 三條標準字卡浮現。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「不甜、不苦、不澀。」
+「三條都通過——才是日式咖啡牛乳。」
+（停一拍）
+「下次買飲料——」
+「拿這三條去檢查。」
+「追蹤我繼續打破。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>22-24s：「<strong>不甜｜不苦｜不澀</strong>」</li>
+      <li>24-26s：「<strong>三條都通過 = 日式咖啡牛乳</strong>」</li>
+      <li>26-28s：「下次買飲料 / 拿去檢查」</li>
+      <li>28-30s：「破除迷思 #03」+「大人牛乳」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="threads">
+    <div class="threads-label">THREADS 配套貼文</div>
+    <div class="threads-body">日式咖啡牛乳，有三個標準：
+
+一、不甜——比鮮奶茶不甜。糖只放夠「放大香氣」，不放更多。
+
+二、不苦——比拿鐵不苦。用萃取咖啡，不是 espresso。
+
+三、不澀——鮮乳 + 好豆，喝完嘴裡是乾淨的。
+
+三條都通過，才是日式咖啡牛乳。
+
+下次買飲料，拿這三條去檢查。
+
+破除迷思 #03</div>
+  </div>
+</article>
+
+<!-- ========== #10 ========== -->
+<article class="episode" id="ep10">
+  <span class="ep-tag">W4 #10 · 30 秒</span>
+  <h2 class="ep-title">「日本販賣機 200 種飲料——賣最久的不是奶茶」</h2>
+  <div class="ep-meta">
+    <span>IG Reels 主推</span>
+    <span>支柱 B + A · 品類佐證</span>
+    <span>奶茶關鍵字：奶茶</span>
+    <span>CTA：信任型</span>
+  </div>
+  <div class="ep-summary">
+    用「日本 70 年品類歷史」當佐證，把日式咖啡牛乳從「新潮飲料」重新定位成「百年日常」。對比奶茶這類流行飲料的短暫，凸顯品類的持久力。
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">標題</span><span class="section-time">0–1.5 秒</span><span class="section-title">主標卡</span></div>
+    <div class="field"><div class="field-value dialog">品類佐證 #01
+————————
+日本販賣機 200 種飲料
+賣最久的不是奶茶</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">HOOK</span><span class="section-time">1.5–5 秒</span><span class="section-title">販賣機 wide</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">日本街頭自動販賣機 wide shot，鏡頭推近一排排飲料。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「日本販賣機——」
+「平均 200 種飲料。」
+「但賣最久的——」
+「不是奶茶、不是綠茶、不是可樂。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>1.5-3s：「日本販賣機 / 200 種飲料」</li>
+      <li>3-5s：「<strong>賣最久的不是奶茶</strong>」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">STORY 1</span><span class="section-time">5–13 秒</span><span class="section-title">流行飲料的命運</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">日本販賣機歷年照片快剪（80 年代、90 年代、2000 年代、現在）。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「奶茶——熱了 5 年，現在退場。」
+「能量飲——熱了 10 年，現在退場。」
+「綠茶——一直在，但被瓶裝水搶走。」
+「流行飲料——」
+「來來去去。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>5-7s：「奶茶｜熱 5 年 → 退場」</li>
+      <li>7-9s：「能量飲｜熱 10 年 → 退場」</li>
+      <li>9-11s：「綠茶｜被搶走」</li>
+      <li>11-13s：「<strong>流行飲料 = 來來去去</strong>」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">STORY 2</span><span class="section-time">13–22 秒</span><span class="section-title">咖啡牛乳賣 70 年</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">日本販賣機特寫，咖啡牛乳排排站（玻璃瓶/紙盒）→ 1955 年的廣告 vs 現在。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「咖啡牛乳——」
+「1955 年明治乳業推出。」
+「賣到現在——」
+「70 年。」
+（停一拍）
+「販賣機從黑白變彩色。」
+「飲料從可樂換到能量飲。」
+「但咖啡牛乳——」
+「一直在。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>13-15s：「<strong>咖啡牛乳｜1955 → 現在</strong>」</li>
+      <li>15-17s：「<strong>70 年</strong>」（大字、強調）</li>
+      <li>17-19s：「販賣機換了一代又一代」</li>
+      <li>19-22s：「<strong>它一直在</strong>」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">OFFER</span><span class="section-time">22–30 秒</span><span class="section-title">不是流行，是日常</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">日本街角，玻璃瓶大人牛乳擺在現代販賣機前。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「能撐 70 年的飲料——」
+「不是流行。」
+「是日常。」
+（停一拍）
+「下次選飲料——」
+「想想哪一杯，10 年後還在。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>22-24s：「<strong>70 年 = 不是流行，是日常</strong>」</li>
+      <li>24-26s：「下次選飲料 / 想想 10 年後」</li>
+      <li>26-28s：「品類佐證 #01」</li>
+      <li>28-30s：「大人牛乳」logo</li>
+    </ul></div></div>
+  </div>
+
+  <div class="threads">
+    <div class="threads-label">THREADS 配套貼文</div>
+    <div class="threads-body">日本販賣機平均 200 種飲料。
+
+但賣最久的，不是奶茶、不是綠茶、不是可樂。
+
+是咖啡牛乳。從 1955 年明治乳業推出到現在——70 年。
+
+販賣機從黑白變彩色，飲料從可樂換到能量飲。但咖啡牛乳，一直在。
+
+能撐 70 年的飲料，不是流行，是日常。
+
+下次選飲料，想想哪一杯，10 年後還在。
+
+品類佐證 #01</div>
+  </div>
+</article>
+
+<!-- ========== #11 ========== -->
+<article class="episode" id="ep11">
+  <span class="ep-tag">W4 #11 · 44 秒 ★長片</span>
+  <h2 class="ep-title">「為什麼咖啡牛乳叫『大人』，奶茶從來不叫？」</h2>
+  <div class="ep-meta">
+    <span>IG Reels 主推</span>
+    <span>支柱 A · 品牌定義</span>
+    <span>奶茶關鍵字：奶茶</span>
+    <span>CTA：價值觀認同</span>
+  </div>
+  <div class="ep-summary">
+    用「為什麼叫大人」這個品牌好奇心當入口，回答完帶出品牌核心理念——咖啡牛乳是「為自己慢下來」的飲品，這是大人才懂的事。
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">標題</span><span class="section-time">0–1.5 秒</span><span class="section-title">主標卡</span></div>
+    <div class="field"><div class="field-value dialog">品牌定義
+————————
+為什麼咖啡牛乳叫『大人』
+奶茶從來不叫？</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">HOOK</span><span class="section-time">1.5–5 秒</span><span class="section-title">奶茶誰都喝</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">手搖店招牌、奶茶杯、玻璃瓶大人牛乳並排。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「奶茶——」
+「大人喝、小孩也喝。」
+「你看過『大人奶茶』嗎？」
+（停一拍）
+「那為什麼這杯咖啡牛乳——」
+「叫『大人』？」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>1.5-3s：「奶茶 → 大人小孩都喝」</li>
+      <li>3-5s：「<strong>那為什麼叫『大人』？</strong>」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">STORY 1</span><span class="section-time">5–13 秒</span><span class="section-title">奶茶不需要懂</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">奶茶店場景：小孩、學生、上班族、媽媽都在排隊。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「奶茶——」
+「不需要解釋。」
+「甜、好喝、隨手一杯。」
+「你不需要『懂』什麼——」
+「就能喝。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>5-7s：「奶茶｜誰都能喝」</li>
+      <li>7-9s：「不需要解釋」</li>
+      <li>9-13s：「<strong>不需要『懂』什麼</strong>」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">STORY 2</span><span class="section-time">13–30 秒</span><span class="section-title">「大人」是什麼意思</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">玻璃瓶倒進杯、女主角喝一口、窗邊的安靜瞬間。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「咖啡牛乳——」
+「需要一點時間懂。」
+（停一拍）
+「懂第一口奶香、懂第二口咖啡尾韻。」
+「懂為什麼不甜更好。」
+「懂為什麼要慢慢喝。」
+（停一拍）
+「『大人』——」
+「不是年齡。」
+「是知道為自己——」
+「慢下來的人。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>13-15s：「<strong>咖啡牛乳｜需要懂</strong>」</li>
+      <li>15-18s：「懂第一口、懂第二口」</li>
+      <li>18-21s：「懂為什麼不甜、為什麼慢」</li>
+      <li>21-25s：「<strong>『大人』≠ 年齡</strong>」</li>
+      <li>25-30s：「<strong>= 知道為自己慢下來的人</strong>」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">STORY 3</span><span class="section-time">30–38 秒</span><span class="section-title">所以這杯給誰</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">日本街頭散步畫面（呼應 #03）、女主角窗邊的剪影。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「不是給所有人的。」
+「是給知道——」
+「自己值得 5 分鐘的人。」
+「給知道——」
+「奶茶是犒賞，咖啡牛乳是日常的人。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>30-32s：「<strong>不是給所有人</strong>」</li>
+      <li>32-34s：「給知道自己值得 5 分鐘的人」</li>
+      <li>34-38s：「<strong>給把咖啡牛乳當日常的人</strong>」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">OFFER</span><span class="section-time">38–44 秒</span><span class="section-title">歡迎邀請</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">玻璃瓶大人牛乳特寫 + logo。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「如果你也是這樣的大人——」
+「歡迎你。」
+（停一拍）
+「追蹤我，繼續慢下來。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>38-40s：「<strong>如果你也是這樣的大人</strong>」</li>
+      <li>40-42s：「歡迎你」</li>
+      <li>42-44s：「品牌定義」+「大人牛乳」logo</li>
+    </ul></div></div>
+  </div>
+
+  <div class="threads">
+    <div class="threads-label">THREADS 配套貼文</div>
+    <div class="threads-body">為什麼咖啡牛乳叫「大人」，奶茶從來不叫？
+
+奶茶誰都能喝。甜、好喝、隨手一杯，不需要懂什麼。
+
+咖啡牛乳——需要一點時間懂。懂第一口奶香、懂第二口咖啡尾韻、懂為什麼不甜更好、懂為什麼要慢慢喝。
+
+「大人」不是年齡。是知道為自己慢下來的人。
+
+不是給所有人的。是給知道自己值得 5 分鐘的人。給把咖啡牛乳當日常的人。
+
+如果你也是這樣的大人——歡迎你。
+
+品牌定義</div>
+  </div>
+</article>
+
+<!-- ========== #12 ========== -->
+<article class="episode" id="ep12">
+  <span class="ep-tag">W4 #12 · 30 秒</span>
+  <h2 class="ep-title">「奶茶是犒賞，咖啡牛乳是日常」</h2>
+  <div class="ep-meta">
+    <span>IG Reels + Threads 雙軌</span>
+    <span>支柱 D · 信念宣言</span>
+    <span>奶茶關鍵字：奶茶</span>
+    <span>CTA：信念共同體</span>
+  </div>
+  <div class="ep-summary">
+    用最簡單的對句把整個 30 天的品牌訊息收束成一個信念。觀眾接受這句，就接受品牌世界觀。30 天 12 支收尾。
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">標題</span><span class="section-time">0–1.5 秒</span><span class="section-title">主標卡</span></div>
+    <div class="field"><div class="field-value dialog">信念宣言
+————————
+奶茶是犒賞
+咖啡牛乳是日常</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">HOOK</span><span class="section-time">1.5–5 秒</span><span class="section-title">對句直接打</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">奶茶杯特寫 → 玻璃瓶大人牛乳特寫。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「奶茶——」
+「是你下午的犒賞。」
+（停一拍）
+「咖啡牛乳——」
+「是你的日常。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>1.5-3s：「奶茶 = 犒賞」</li>
+      <li>3-5s：「咖啡牛乳 = 日常」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">STORY 1</span><span class="section-time">5–13 秒</span><span class="section-title">三組對句</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">兩種狀態切換——犒賞型（特殊場合、慶祝、補償）vs 日常型（每天 5 分鐘儀式）。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「犒賞——是想到了才喝。」
+「日常——是每天都有。」
+
+「犒賞——喝完有罪惡感。」
+「日常——喝完是滿足。」
+
+「犒賞——貴一點才感覺值得。」
+「日常——值得每天都有。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>5-7s：「犒賞｜想到才喝 ｜ 日常｜每天都有」</li>
+      <li>7-10s：「犒賞｜罪惡 ｜ 日常｜滿足」</li>
+      <li>10-13s：「犒賞｜貴才值得 ｜ 日常｜每天值得」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">STORY 2</span><span class="section-time">13–22 秒</span><span class="section-title">為什麼這個分別重要</span></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「我們不是反對奶茶——」
+「奶茶有它的位置。」
+（停一拍）
+「但你 7 天裡有 5 天的下午——」
+「值得不只是『犒賞』。」
+「值得有一杯——」
+「真的屬於你的日常。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>13-15s：「<strong>不是反對奶茶</strong>」</li>
+      <li>15-18s：「奶茶有它的位置」</li>
+      <li>18-22s：「<strong>5 天值得一杯日常</strong>」</li>
+    </ul></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-label">OFFER</span><span class="section-time">22–30 秒</span><span class="section-title">信念邀請</span></div>
+    <div class="field"><div class="field-label">畫面</div><div class="field-value scene">女主角窗邊喝咖啡牛乳的剪影 + logo 浮現。</div></div>
+    <div class="field"><div class="field-label">口播</div><div class="field-value dialog">「奶茶是犒賞。」
+「咖啡牛乳是日常。」
+（停一拍）
+「如果你也認同——」
+「歡迎進來。」</div></div>
+    <div class="field"><div class="field-label">字幕</div><div class="field-value captions"><ul>
+      <li>22-24s：「<strong>奶茶 = 犒賞</strong>」</li>
+      <li>24-26s：「<strong>咖啡牛乳 = 日常</strong>」</li>
+      <li>26-28s：「<strong>如果你也認同——</strong>」</li>
+      <li>28-30s：「歡迎進來」+「大人牛乳」logo</li>
+    </ul></div></div>
+    <div class="note">30 天 12 支的最終收尾，整個品牌敘事弧的完成點。</div>
+  </div>
+
+  <div class="threads">
+    <div class="threads-label">THREADS 配套貼文</div>
+    <div class="threads-body">奶茶是犒賞。咖啡牛乳是日常。
+
+犒賞——想到了才喝。日常——每天都有。
+犒賞——喝完有罪惡。日常——喝完是滿足。
+犒賞——貴一點才值得。日常——每天都值得。
+
+我們不是反對奶茶。奶茶有它的位置。
+
+但你 7 天裡有 5 天的下午，值得不只是「犒賞」。值得有一杯，真的屬於你的日常。
+
+如果你也認同——歡迎進來。
+
+信念宣言</div>
+  </div>
+</article>
+
+</main>
+
+<footer>
+  <p>大人牛乳 30 天 12 支｜腳本全集 lock 版</p>
+  <p style="margin-top: 6px; opacity: 0.7;"><a href="index.html">分鏡對照表（含畫面）</a> · <a href="scripts/">下載原始 markdown</a></p>
+</footer>
+
+<script>
+  // Auto-close nav details after click
+  const navToc = document.getElementById('nav-toc');
+  if (navToc) {
+    navToc.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => navToc.removeAttribute('open'));
+    });
+  }
+</script>
+
+</body>
+</html>
