@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大人牛乳 30 天 12 支｜W1 分鏡對照表</title>
+<style>
+  :root {
+    --primary: #6B4423;
+    --accent: #C8956D;
+    --light: #F5EDE3;
+    --border: #D4C4B0;
+    --text: #2A2018;
+    --muted: #7A6B5D;
+    --highlight: #FFF4E6;
+    --bg: #FBF7F1;
+    --card-bg: #FFFFFF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  /* === Header === */
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, #8B5A2E 100%);
+    color: #FFF8EC;
+    padding: 60px 24px 40px;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+  .header .subtitle {
+    font-size: 16px;
+    opacity: 0.85;
+    margin-bottom: 24px;
+  }
+  .header .badges {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .header .badges span {
+    background: rgba(255, 248, 236, 0.15);
+    border: 1px solid rgba(255, 248, 236, 0.3);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+  }
+
+  /* === Sticky nav === */
+  .nav {
+    position: sticky;
+    top: 0;
+    background: rgba(251, 247, 241, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px;
+    z-index: 100;
+    text-align: center;
+  }
+  .nav a {
+    display: inline-block;
+    padding: 8px 18px;
+    margin: 0 4px;
+    color: var(--primary);
+    text-decoration: none;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+  .nav a:hover {
+    background: var(--light);
+  }
+
+  /* === Container === */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  /* === Video block === */
+  .video-block {
+    margin-bottom: 80px;
+  }
+  .video-header {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 32px;
+    box-shadow: 0 2px 12px rgba(107, 68, 35, 0.06);
+  }
+  .video-number {
+    display: inline-block;
+    background: var(--primary);
+    color: #FFF8EC;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+  }
+  .video-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+  .video-meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .video-meta span {
+    background: var(--light);
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+  .video-summary {
+    color: var(--muted);
+    font-size: 15px;
+    border-left: 3px solid var(--accent);
+    padding-left: 12px;
+  }
+
+  /* === HSO section heading === */
+  .section-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 36px 0 20px;
+    padding: 0 4px;
+  }
+  .section-heading .label {
+    background: var(--accent);
+    color: #FFF8EC;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.05em;
+  }
+  .section-heading h3 {
+    font-size: 18px;
+    color: var(--primary);
+    font-weight: 600;
+  }
+
+  /* === Shot card === */
+  .shot {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 0;
+    margin-bottom: 20px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 0;
+    box-shadow: 0 1px 6px rgba(107, 68, 35, 0.04);
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .shot:hover {
+    box-shadow: 0 6px 24px rgba(107, 68, 35, 0.12);
+    transform: translateY(-2px);
+  }
+  .shot-image {
+    background: var(--light);
+    overflow: hidden;
+    position: relative;
+  }
+  .shot-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    cursor: zoom-in;
+  }
+  .shot-image .label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(42, 32, 24, 0.75);
+    color: #FFF8EC;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+  }
+  .shot-content {
+    padding: 22px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .shot-time {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .shot-time .time {
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 700;
+    background: var(--highlight);
+    padding: 3px 10px;
+    border-radius: 5px;
+  }
+  .shot-time .name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+  .shot-row {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 14.5px;
+    line-height: 1.65;
+  }
+  .shot-row .icon {
+    flex-shrink: 0;
+    width: 22px;
+    text-align: center;
+    margin-top: 1px;
+  }
+  .shot-row .key {
+    flex-shrink: 0;
+    color: var(--accent);
+    font-weight: 600;
+    width: 50px;
+  }
+  .shot-row .value {
+    flex: 1;
+    color: var(--text);
+  }
+  .shot-row .value.dialog {
+    background: var(--highlight);
+    border-left: 3px solid var(--accent);
+    padding: 8px 12px;
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    margin-left: -8px;
+  }
+  .shot-note {
+    background: var(--light);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .shot-note .note-icon {
+    margin-right: 6px;
+  }
+
+  /* === Footer === */
+  .footer {
+    background: var(--primary);
+    color: #FFF8EC;
+    padding: 50px 24px;
+    text-align: center;
+    margin-top: 60px;
+  }
+  .footer h2 {
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
+  .footer p {
+    font-size: 14px;
+    opacity: 0.85;
+    max-width: 600px;
+    margin: 0 auto 8px;
+    line-height: 1.7;
+  }
+  .footer .small {
+    margin-top: 24px;
+    font-size: 12px;
+    opacity: 0.6;
+  }
+
+  /* === Lightbox === */
+  .lightbox {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(42, 32, 24, 0.92);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+    padding: 24px;
+  }
+  .lightbox.active {
+    display: flex;
+  }
+  .lightbox img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 12px 60px rgba(0, 0, 0, 0.5);
+  }
+
+  /* === Mobile === */
+  @media (max-width: 720px) {
+    .header { padding: 40px 16px 28px; }
+    .header h1 { font-size: 24px; }
+    .container { padding: 24px 12px 60px; }
+    .video-header { padding: 20px; }
+    .video-title { font-size: 20px; }
+    .shot {
+      grid-template-columns: 1fr;
+    }
+    .shot-image {
+      aspect-ratio: 9/16;
+      max-height: 60vh;
+    }
+    .shot-content { padding: 18px 20px; }
+    .nav a { padding: 6px 12px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <h1>大人牛乳 30 天 12 支</h1>
+  <div class="subtitle">W1 立旗週｜分鏡對照表（lock 版）</div>
+  <div class="badges">
+    <span>3 支腳本</span>
+    <span>20 個分鏡</span>
+    <span>9:16 IG Reels</span>
+    <span>女主角同一人</span>
+  </div>
+</header>
+
+<nav class="nav">
+  <a href="#video-01">#01 你以為咖啡牛乳是甜的</a>
+  <a href="#video-02">#02 下午 4 點就累的真正原因</a>
+  <a href="#video-03">#03 在日本當外人的那個我</a>
+</nav>
+
+<div class="container">
+
+<!-- ========== #01 ========== -->
+<section class="video-block" id="video-01">
+  <div class="video-header">
+    <span class="video-number">#01 / W1</span>
+    <h2 class="video-title">咖啡牛乳是甜的——我們被騙了 30 年</h2>
+    <div class="video-meta">
+      <span>30 秒</span>
+      <span>IG Reels 主推</span>
+      <span>支柱 A · 品類差異化</span>
+      <span>破除迷思系列 #01</span>
+      <span>Follow trigger：系列承諾型</span>
+    </div>
+    <div class="video-summary">
+      用「我們被騙」把觀眾跟品牌放在同一陣線（共同對抗超商工業飲料），不是「你錯了」（觀眾被責備）。三秒漸進表情是視覺扳機。
+    </div>
+  </div>
+
+  <div class="section-heading"><span class="label">HOOK</span><h3>0-5 秒｜認知反差</h3></div>
+  <div class="shot">
+    <div class="shot-image"><span class="label">Shot 1</span><img src="01-shot01-fridge.png" alt="超商冰櫃"></div>
+    <div class="shot-content">
+      <div class="shot-time"><span class="time">0-5 秒</span><span class="name">超商冰櫃 zoom in</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">畫面</span><span class="value">超商冰櫃畫面，七八種咖啡牛乳排排站，全是深褐色像可樂。鏡頭快速 zoom 到其中一罐，然後拉出。</span></div>
+      <div class="shot-row"><span class="icon">🎙️</span><span class="key">口播</span><span class="value dialog">「咖啡牛乳是甜的——」（停一拍）「我們被騙了 30 年。」</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">字卡</span><span class="value">右下小字「破除迷思 #01」（系列定位低調建立）</span></div>
+      <div class="shot-note"><span class="note-icon">📝</span>用「我們」而不是「你」是關鍵。共犯感比指責有效。</div>
+    </div>
+  </div>
+
+  <div class="section-heading"><span class="label">STORY</span><h3>5-22 秒｜證據對比 → 試喝體驗 → 金句</h3></div>
+
+  <div class="shot">
+    <div class="shot-image"><span class="label">Shot 2</span><img src="01-shot02-pour-conv.png" alt="超商款倒入"></div>
+    <div class="shot-content">
+      <div class="shot-time"><span class="time">5-7 秒</span><span class="name">超商款倒入（黑可樂色 + 掛壁）</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">畫面</span><span class="value">左邊「超商款」倒進透明玻璃杯——液體深褐色像可樂，倒完杯壁有掛痕（甜飲糖含量高的視覺證據）。</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">字卡</span><span class="value">「糖 8 克」「咖啡香精」「調味乳」（隨倒出動作浮現）</span></div>
+    </div>
+  </div>
+
+  <div class="shot">
+    <div class="shot-image"><span class="label">Shot 3</span><img src="01-shot03-pour-bloom.png" alt="大人牛乳倒入"></div>
+    <div class="shot-content">
+      <div class="shot-time"><span class="time">7-9 秒</span><span class="name">大人牛乳倒入（淺奶咖色 + 分層）</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">畫面</span><span class="value">右邊「玻璃瓶大人牛乳」倒進同樣的玻璃杯——淺奶咖色、有明顯牛奶分層線。</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">字卡</span><span class="value">「糖 2 克」「真實咖啡」「鮮乳」</span></div>
+      <div class="shot-row"><span class="icon">🎙️</span><span class="key">口播</span><span class="value dialog">（9-12 秒拉開兩杯對比）「同一個名字 / 兩種東西。」（停一拍）「裡面差了 30 年。」</span></div>
+      <div class="shot-note"><span class="note-icon">📝</span>視覺對比是觀眾的認知突破點。建議用慢動作拍倒入。</div>
+    </div>
+  </div>
+
+  <div class="shot">
+    <div class="shot-image"><span class="label">Shot 4</span><img src="01-shot04-tasting.png" alt="試喝表情"></div>
+    <div class="shot-content">
+      <div class="shot-time"><span class="time">12-18 秒</span><span class="name">三秒漸進表情（試喝）</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">畫面</span><span class="value">女主角喝一口大人牛乳：第一秒微皺眉 → 第二秒眼神微亮 → 第三秒輕輕點頭 → 放下杯子，平靜的微笑。</span></div>
+      <div class="shot-row"><span class="icon">🎙️</span><span class="key">口播</span><span class="value dialog">「不甜 / 不是不好喝。是讓你終於喝到 / 咖啡跟牛奶本身的味道。」</span></div>
+      <div class="shot-note"><span class="note-icon">📝</span>三秒的節奏：皺眉（0.7 秒）→ 眼神放鬆（0.5 秒）→ 點頭（0.5 秒）→ 微笑。觀眾以為「不甜＝不好喝」會產生質疑，後兩秒推翻這個質疑——讓觀眾感覺自己跟著她一起發現。</div>
+    </div>
+  </div>
+
+  <div class="shot">
+    <div class="shot-image"><span class="label">Shot 5</span><img src="01-shot05-glass.png" alt="玻璃杯特寫"></div>
+    <div class="shot-content">
+      <div class="shot-time"><span class="time">18-22 秒</span><span class="name">金句植入</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">畫面</span><span class="value">玻璃杯特寫，杯壁上的牛奶層次。鏡頭慢慢推近。</span></div>
+      <div class="shot-row"><span class="icon">🎙️</span><span class="key">口播</span><span class="value dialog">「真正的咖啡牛乳——」</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">字卡</span><span class="value">「喝完嘴裡 / 只剩牛奶香」（淡入，停 1.5 秒）</span></div>
+      <div class="shot-note"><span class="note-icon">📝</span>全片記憶點金句。要讓觀眾看完想截圖、想引用。配樂在這個瞬間降到最低。</div>
+    </div>
+  </div>
+
+  <div class="section-heading"><span class="label">OFFER</span><h3>22-30 秒｜系列承諾 + 下集預告</h3></div>
+  <div class="shot">
+    <div class="shot-image"><span class="label">Shot 6</span><img src="01-shot06-offer.png" alt="女主角面對鏡頭"></div>
+    <div class="shot-content">
+      <div class="shot-time"><span class="time">22-30 秒</span><span class="name">Follow trigger</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">畫面</span><span class="value">女主角面對鏡頭。背景是溫暖的店面或工作室空間。她手裡是玻璃瓶大人牛乳。</span></div>
+      <div class="shot-row"><span class="icon">🎙️</span><span class="key">口播</span><span class="value dialog">「但這只是 / 我們被誤會的第一件事。」（停一拍）「下一集——咖啡牛乳該不該配早餐？」（停一拍）「追蹤我 / 繼續發現。」</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">字卡</span><span class="value">結尾：「破除迷思 #01／待續」+「大人牛乳」（logo）</span></div>
+      <div class="shot-note"><span class="note-icon">📝</span>具體下集預告比抽象的「追蹤我」強十倍。觀眾有立刻想看的理由。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== #02 ========== -->
+<section class="video-block" id="video-02">
+  <div class="video-header">
+    <span class="video-number">#02 / W1</span>
+    <h2 class="video-title">下午 4 點就累的真正原因</h2>
+    <div class="video-meta">
+      <span>28-30 秒</span>
+      <span>IG Reels 主推</span>
+      <span>支柱 B · 場景情感</span>
+      <span>30 天日常實驗系列 #01</span>
+      <span>Follow trigger：實驗訂閱型</span>
+    </div>
+    <div class="video-summary">
+      先擊中觀眾痛點（你是不是這樣），再提供反直覺歸因（不是你的問題，是那杯飲料的問題），最後給解法 + 系列訂閱。前 15 秒講「你」、後 7 秒才講「我」。
+    </div>
+  </div>
+
+  <div class="section-heading"><span class="label">HOOK</span><h3>0-5 秒｜痛點直擊</h3></div>
+  <div class="shot">
+    <div class="shot-image"><span class="label">Shot 1</span><img src="02-shot01-hook.png" alt="4點趴桌"></div>
+    <div class="shot-content">
+      <div class="shot-time"><span class="time">0-5 秒</span><span class="name">4 點趴桌</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">畫面</span><span class="value">辦公室。下午 4 點時鐘特寫（拍出秒針的「滴答」聲）。鏡頭 pan 下，女主角臉趴在桌上。手邊有一杯只剩冰塊的奶茶。</span></div>
+      <div class="shot-row"><span class="icon">🎙️</span><span class="key">口播</span><span class="value dialog">「你下午四點就累 / 晚餐又吃不下 / 半夜還會嘴饞——」（停半拍）「你以為是工作太累？」</span></div>
+      <div class="shot-note"><span class="note-icon">📝</span>4 點時鐘是觀眾的時間錨點——「對欸我下午就是這個時間」。秒針滴答聲建議用真實環境音採集。</div>
+    </div>
+  </div>
+
+  <div class="section-heading"><span class="label">STORY</span><h3>5-22 秒｜連鎖反應 → 揭示 → 解法</h3></div>
+
+  <div class="shot">
+    <div class="shot-image"><span class="label">Shot 2</span><img src="02-shot02-cycle.png" alt="奶茶最後一口"></div>
+    <div class="shot-content">
+      <div class="shot-time"><span class="time">5-11 秒</span><span class="name">連鎖反應（6 個快剪）</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">畫面</span><span class="value">快速場景剪接，每個畫面 1 秒：奶茶最後一口 → 灌水 → 眼皮垂下 → 晚餐沒胃口 → 半夜冰箱前 → 隔天早上鬧鐘。</span></div>
+      <div class="shot-row"><span class="icon">🎙️</span><span class="key">口播</span><span class="value dialog">「下午一杯奶茶。 / 四點犯睏。 / 晚餐沒胃口。 / 半夜嘴饞。 / 隔天又累。」</span></div>
+      <div class="shot-note"><span class="note-icon">📝</span>每句口播配一個畫面，6 秒內看完整個循環，自我認知「對欸我也是這樣」。建議實拍而不是動畫。</div>
+    </div>
+  </div>
+
+  <div class="shot">
+    <div class="shot-image"><span class="label">Shot 3</span><img src="02-shot03-empty-cup.png" alt="空奶茶杯"></div>
+    <div class="shot-content">
+      <div class="shot-time"><span class="time">11-15 秒</span><span class="name">揭示｜定格收回</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">畫面</span><span class="value">所有快剪畫面收回，定格在一杯空了的奶茶杯。鏡頭慢慢推近。</span></div>
+      <div class="shot-row"><span class="icon">🎙️</span><span class="key">口播</span><span class="value dialog">「不是工作太累。」（停一拍）「是那杯奶茶 / 把你整天 / 都吃掉了。」</span></div>
+      <div class="shot-note"><span class="note-icon">📝</span>從「快速認同」進入「慢速思考」的關鍵節點。觀眾這 4 秒會經歷「等等真的嗎」的腦內質疑——這就是讓他繼續看下去的動力。</div>
+    </div>
+  </div>
+
+  <div class="shot">
+    <div class="shot-image"><span class="label">Shot 4</span><img src="02-shot04-solution.png" alt="解法 4點還在工作"></div>
+    <div class="shot-content">
+      <div class="shot-time"><span class="time">15-22 秒</span><span class="name">解法｜我替你試了</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">畫面</span><span class="value">同樣的辦公桌但這次桌上是大人牛乳玻璃瓶。她從容打開、倒出、喝一口。4 點時鐘畫面（呼應 Hook），但這次她沒趴下還在打字。晚餐桌上她吃得開心。</span></div>
+      <div class="shot-row"><span class="icon">🎙️</span><span class="key">口播</span><span class="value dialog">「我換了一杯。 / 30 天。」（停一拍）「不口渴。 / 不犯睏。 / 晚餐胃口回來了。」</span></div>
+      <div class="shot-note"><span class="note-icon">📝</span>這裡才出現第一人稱「我」。前 15 秒講「你」，現在講「我」——觀眾會有「她替我做了我該做的事」的代入感。</div>
+    </div>
+  </div>
+
+  <div class="section-heading"><span class="label">OFFER</span><h3>22-30 秒｜實驗系列訂閱</h3></div>
+  <div class="shot">
+    <div class="shot-image"><span class="label">Shot 5</span><img src="02-shot05-window.png" alt="窗邊喝牛乳"></div>
+    <div class="shot-content">
+      <div class="shot-time"><span class="time">22-30 秒</span><span class="name">Follow trigger</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">畫面</span><span class="value">女主角坐在窗邊，桌上玻璃瓶。手機放在桌上正面朝下。她看著窗外，慢慢喝一口。鏡頭從玻璃瓶 pan up 到她平靜的臉。</span></div>
+      <div class="shot-row"><span class="icon">🎙️</span><span class="key">口播</span><span class="value dialog">「下午 / 只是第一個問題。」（停一拍）「還有 29 個 / 我在替你解決。」（停一拍）「追蹤我，看下一個。」</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">字卡</span><span class="value">28 秒：「30 天日常實驗 #01／30」｜29 秒：「大人牛乳」（logo）</span></div>
+      <div class="shot-note"><span class="note-icon">📝</span>「我在替你解決」——把品牌定位為「服務者」不是「實驗者」。觀眾感覺「她在替我想」。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== #03 ========== -->
+<section class="video-block" id="video-03">
+  <div class="video-header">
+    <span class="video-number">#03 / W1</span>
+    <h2 class="video-title">在日本當外人的那個我（60 秒版）</h2>
+    <div class="video-meta">
+      <span>60 秒</span>
+      <span>IG Reels 主推</span>
+      <span>支柱 A + B</span>
+      <span>情感重建</span>
+      <span>Follow trigger：情感歸屬型</span>
+    </div>
+    <div class="video-summary">
+      用觀眾自己對日本的記憶，把「日式咖啡牛乳」重建為情感符號。鏡頭 9 機場最後一瓶是全片靈魂。「我想念的不是日本，是在日本當外人的那個我」是金句。
+    </div>
+  </div>
+
+  <div class="section-heading"><span class="label">HOOK</span><h3>0-11 秒｜日本人的咖啡牛乳</h3></div>
+
+  <div class="shot">
+    <div class="shot-image"><span class="label">Shot 2</span><img src="03-shot02-tokyo-ol.png" alt="東京 OL"></div>
+    <div class="shot-content">
+      <div class="shot-time"><span class="time">3-7 秒</span><span class="name">東京通勤｜OL 電車</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">畫面</span><span class="value">日本電車車廂內，OL 戴著耳機站著，手裡拿著一瓶咖啡牛乳，邊看手機邊滑。電車到站，她下車。咖啡牛乳沒有任何特寫——它只是手中的物。</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">字卡</span><span class="value">「東京 / 早上 8:32」（小字，畫面右下）</span></div>
+      <div class="shot-row"><span class="icon">🎙️</span><span class="key">環境</span><span class="value">電車運行聲、廣播聲（日文）</span></div>
+      <div class="shot-row"><span class="icon">🎙️</span><span class="key">字幕</span><span class="value dialog">（鏡頭 1，0-3 秒，純黑底字卡）「對日本人來說，這只是一瓶飲料。」</span></div>
+    </div>
+  </div>
+
+  <div class="shot">
+    <div class="shot-image"><span class="label">Shot 3</span><img src="03-shot03-kyoto-students.png" alt="京都高中生"></div>
+    <div class="shot-content">
+      <div class="shot-time"><span class="time">7-11 秒</span><span class="name">京都放學｜高中生</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">畫面</span><span class="value">日本街頭，幾個高中女生放學走在一起講話，其中一個邊走邊喝咖啡牛乳，喝完隨手丟進旁邊的回收桶。她沒回頭。</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">字卡</span><span class="value">「京都 / 下午 4:45」</span></div>
+      <div class="shot-note"><span class="note-icon">📝</span>「她沒回頭」這個細節是神來一筆。建議鏡頭多停 0.5 秒讓動作被「看見」。</div>
+    </div>
+  </div>
+
+  <div class="section-heading"><span class="label">STORY</span><h3>11-48 秒｜你在日本的記憶</h3></div>
+
+  <div class="shot" style="grid-template-columns: 1fr;">
+    <div class="shot-content" style="padding: 18px 26px;">
+      <div class="shot-time"><span class="time">11-16 秒</span><span class="name">轉場拋問（黑場字卡）</span></div>
+      <div class="shot-row"><span class="icon">🎙️</span><span class="key">旁白</span><span class="value dialog">（女聲，輕、像自言自語）「對他們來說 / 這只是一瓶咖啡牛乳。」（字卡停 1 秒）「但對你來說呢？」</span></div>
+      <div class="shot-note"><span class="note-icon">📝</span>整支片的扳機句。「對你來說呢？」這四個字會讓觀眾自動進入回憶模式。字卡至少停 1.5 秒讓觀眾消化。</div>
+    </div>
+  </div>
+
+  <div class="shot">
+    <div class="shot-image"><span class="label">Shot 6</span><img src="03-shot06-konbini.png" alt="便利商店外飯糰"></div>
+    <div class="shot-content">
+      <div class="shot-time"><span class="time">16-21 秒</span><span class="name">便利商店外｜慢慢吃飯糰</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">畫面</span><span class="value">日本便利商店外。女生背著大後背包、手腕掛著紙袋（明顯觀光客）。手裡拿著咖啡牛乳跟一個飯糰，靠在牆邊吃。腳邊有地圖摺頁。</span></div>
+      <div class="shot-row"><span class="icon">🎙️</span><span class="key">旁白</span><span class="value dialog">「在日本 / 你會站在便利商店外面 / 慢慢吃完一個飯糰。」</span></div>
+    </div>
+  </div>
+
+  <div class="shot">
+    <div class="shot-image"><span class="label">Shot 7</span><img src="03-shot07-minshuku.png" alt="民宿早晨"></div>
+    <div class="shot-content">
+      <div class="shot-time"><span class="time">21-26 秒</span><span class="name">民宿早晨｜什麼都不做</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">畫面</span><span class="value">日本民宿房間。女生剛起床、頭髮亂亂的、坐在窗邊小桌前。桌上有行程表、筆記本、咖啡牛乳、便利商店麵包。她沒在做行程，就是看著窗外的小街。</span></div>
+      <div class="shot-row"><span class="icon">🎙️</span><span class="key">旁白</span><span class="value dialog">「在日本 / 你願意花 30 分鐘 / 什麼都不做。」</span></div>
+      <div class="shot-note"><span class="note-icon">📝</span>張力來自「她有事要做，但她選擇不做」。</div>
+    </div>
+  </div>
+
+  <div class="shot">
+    <div class="shot-image"><span class="label">Shot 8</span><img src="03-shot08-park.png" alt="公園長椅"></div>
+    <div class="shot-content">
+      <div class="shot-time"><span class="time">26-31 秒</span><span class="name">公園長椅｜閉眼曬太陽</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">畫面</span><span class="value">日本公園長椅上。女生坐著，運動鞋、後背包、腳邊兩個購物袋。手裡是咖啡牛乳。她閉著眼曬太陽，旁邊有一隻流浪貓。</span></div>
+      <div class="shot-row"><span class="icon">🎙️</span><span class="key">旁白</span><span class="value dialog">「在日本 / 你會在公園的長椅上 / 坐 10 分鐘什麼都不做。」</span></div>
+    </div>
+  </div>
+
+  <div class="shot" style="border: 2px solid var(--accent); background: linear-gradient(to bottom right, var(--card-bg), var(--highlight));">
+    <div class="shot-image"><span class="label" style="background: var(--accent); color: #FFF8EC;">★ 全片靈魂</span><img src="03-shot09-airport.png" alt="機場最後一瓶"></div>
+    <div class="shot-content">
+      <div class="shot-time"><span class="time">31-36 秒</span><span class="name">離境前的最後一瓶</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">畫面</span><span class="value">日本機場航廈內。女生穿著厚外套，行李箱在腳邊，登機證夾在護照裡。她站在販賣機前，手裡剛買的咖啡牛乳還在冒著冷氣。她沒有立刻喝——先看了一眼登機證、看了一眼時間、確認還有時間。然後慢慢喝一口。沒有趕。喝完後閉眼一秒。</span></div>
+      <div class="shot-row"><span class="icon">🎙️</span><span class="key">旁白</span><span class="value dialog">「在日本 / 你會在離開前 / 多買一瓶。」（停一拍）「就為了再多 5 分鐘 / 不是自己。」</span></div>
+      <div class="shot-note"><span class="note-icon">📝</span>「不是自己」的雙關：第一層 = 不是平常的我（觀光客的我）；第二層（看到結尾才懂）= 不是那個沒空慢下來的自己（=真正的自己）。這個雙關只有反覆看才會懂。</div>
+    </div>
+  </div>
+
+  <div class="shot">
+    <div class="shot-image"><span class="label">Shot 10</span><img src="03-shot10-taipei.png" alt="台灣街頭 hard cut"></div>
+    <div class="shot-content">
+      <div class="shot-time"><span class="time">36-41 秒</span><span class="name">回到台灣的「自己」</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">畫面</span><span class="value">HARD CUT 到台灣街頭。同一個女生但截然不同：手裡是手搖飲、提小包、上班襯衫、高跟鞋。邊走邊講電話、邊回 LINE、走得很快。沒有地圖，沒有筆記本。</span></div>
+      <div class="shot-row"><span class="icon">🎙️</span><span class="key">旁白</span><span class="value dialog">「我以為 / 我想念的是日本。」</span></div>
+      <div class="shot-note"><span class="note-icon">📝</span>緊接機場「閉眼一秒」後立刻 hard cut，沒有過場、沒有 fade。任何 transition 都會破壞時間斷裂感。</div>
+    </div>
+  </div>
+
+  <div class="shot">
+    <div class="shot-image"><span class="label">Shot 11</span><img src="03-shot11-konbini-tw.png" alt="台灣便利商店"></div>
+    <div class="shot-content">
+      <div class="shot-time"><span class="time">41-48 秒</span><span class="name">真正的揭示</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">畫面</span><span class="value">女生停下腳步，手機還在響，她沒接。她走進旁邊的便利商店，看到冰櫃裡的大人牛乳。拿起來。</span></div>
+      <div class="shot-row"><span class="icon">🎙️</span><span class="key">旁白</span><span class="value dialog">「後來我才發現 / 我想念的不是日本 / 是在日本當外人的那個我。」（停 1 秒）「那個有藉口慢下來的我。」</span></div>
+      <div class="shot-note"><span class="note-icon">📝</span>「當外人」三個字把「日本旅遊的奢侈」精準定義成「身份的奢侈」。「有藉口」三個字戳爆所有都會人。</div>
+    </div>
+  </div>
+
+  <div class="section-heading"><span class="label">OFFER</span><h3>48-60 秒｜現在的瞬間 + Follow Trigger</h3></div>
+
+  <div class="shot">
+    <div class="shot-image"><span class="label">Shot 12</span><img src="03-shot12-window.png" alt="台灣窗邊大人牛乳"></div>
+    <div class="shot-content">
+      <div class="shot-time"><span class="time">48-54 秒</span><span class="name">現在的瞬間</span></div>
+      <div class="shot-row"><span class="icon">🎬</span><span class="key">畫面</span><span class="value">女生坐在台灣某個窗邊。手裡是大人牛乳。手機放在桌上正面朝下。她看著窗外，慢慢喝一口。表情跟在日本那幾個鏡頭一樣——安靜、放鬆、自在。</span></div>
+      <div class="shot-row"><span class="icon">🎙️</span><span class="key">旁白</span><span class="value dialog">「現在 / 我不用買機票 / 也可以給自己一個藉口。」</span></div>
+      <div class="shot-note"><span class="note-icon">📝</span>「不用買機票」精準收尾——旅遊是奢侈的藉口，大人牛乳是日常的藉口。</div>
+    </div>
+  </div>
+
+  <div class="shot" style="grid-template-columns: 1fr; background: linear-gradient(to bottom right, var(--primary), #8B5A2E); color: #FFF8EC; border-color: var(--primary);">
+    <div class="shot-content" style="padding: 24px 28px;">
+      <div class="shot-time"><span class="time" style="background: rgba(255,248,236,0.2); color: #FFF8EC;">54-60 秒</span><span class="name" style="color: #FFF8EC;">結尾字卡 + Follow Trigger</span></div>
+      <div class="shot-row" style="color: #FFF8EC;">
+        <span class="icon">🎬</span><span class="key" style="color: #FFD9A8;">字卡</span>
+        <span class="value" style="color: #FFF8EC;">黑底，依序淡入：「日式咖啡牛乳。」→「你不用去日本，也可以慢下來。」（停一拍）→「如果你也想念那個 / 有藉口慢下來的自己——」→「追蹤我們。」→「我們會繼續替你保留那個時刻。」→ <strong>大人牛乳（logo）</strong></span>
+      </div>
+      <div style="margin-top: 12px; padding: 12px 14px; background: rgba(255,248,236,0.1); border-radius: 8px; font-size: 13px; line-height: 1.6;">
+        📝 從品牌主張（你不用去日本）→ 認同呼喚（如果你也想念）→ 行動指令（追蹤）→ 承諾（替你保留）。一氣呵成，6 秒完成情感歸屬型 follow trigger。
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer class="footer">
+  <h2>三支看完，觀眾腦中對大人牛乳的認知</h2>
+  <p>「她替我揭穿迷思（#01）、替我解決問題（#02）、替我保留時刻（#03）」</p>
+  <p style="margin-top: 16px;">三支共同視覺：女主角同一人 ｜ 玻璃瓶大人牛乳 ｜ 暖色調光線</p>
+  <p>三層 follow trigger 互不重疊：系列承諾（破除迷思）｜ 實驗訂閱（30 天日常實驗）｜ 情感歸屬</p>
+  <div class="small">分鏡示意圖由 Nano Banana Pro 生成，僅供前期視覺溝通。實際拍攝以選角及場勘為準。</div>
+</footer>
+
+<div class="lightbox" id="lightbox" onclick="this.classList.remove('active')">
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+  // Lightbox for images
+  document.querySelectorAll('.shot-image img').forEach(img => {
+    img.addEventListener('click', e => {
+      e.stopPropagation();
+      const lb = document.getElementById('lightbox');
+      const lbImg = document.getElementById('lightbox-img');
+      lbImg.src = img.src;
+      lb.classList.add('active');
+    });
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('active');
+  });
+</script>
+
+</body>
+</html>
