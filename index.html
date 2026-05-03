@@ -58,7 +58,7 @@
     font-size: 13px;
   }
 
-  /* === Sticky nav === */
+  /* === Sticky nav (collapsible) === */
   .nav {
     position: sticky;
     top: 0;
@@ -66,23 +66,87 @@
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
-    padding: 12px 16px;
     z-index: 100;
-    text-align: center;
+  }
+  .nav details {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .nav summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    user-select: none;
+  }
+  .nav summary::-webkit-details-marker { display: none; }
+  .nav .toc-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+  .nav .toc-hint {
+    font-size: 12px;
+    color: var(--muted);
+    flex: 1;
+  }
+  .nav .toc-arrow {
+    color: var(--accent);
+    font-size: 14px;
+    transition: transform 0.2s;
+  }
+  .nav details[open] .toc-arrow {
+    transform: rotate(180deg);
+  }
+  .nav-body {
+    padding: 0 20px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+  .week-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .week-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+    min-width: 78px;
+  }
+  .week-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    flex: 1;
   }
   .nav a {
     display: inline-block;
-    padding: 8px 18px;
-    margin: 0 4px;
+    padding: 6px 12px;
     color: var(--primary);
     text-decoration: none;
     border-radius: 999px;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 13px;
+    font-weight: 500;
+    background: var(--light);
     transition: background 0.2s;
   }
   .nav a:hover {
-    background: var(--light);
+    background: var(--accent);
+    color: #FFF8EC;
+  }
+  @media (max-width: 720px) {
+    .nav .toc-hint { display: none; }
+    .week-row { flex-direction: column; align-items: flex-start; gap: 4px; }
+    .week-label { min-width: 0; }
   }
 
   /* === Container === */
@@ -359,22 +423,47 @@
 </header>
 
 <nav class="nav">
-  <div style="margin-bottom: 6px; font-size: 11px; opacity: 0.6; letter-spacing: 0.05em;">W1 立旗週</div>
-  <a href="#video-01">#01 跟拿鐵根本一樣吧？</a>
-  <a href="#video-02">#02 戒奶茶 30 天</a>
-  <a href="#video-03">#03 在日本當外人的那個我</a>
-  <div style="margin: 12px 0 6px; font-size: 11px; opacity: 0.6; letter-spacing: 0.05em;">W2 圈粉週</div>
-  <a href="#video-04">#04 比鮮奶茶適合早餐</a>
-  <a href="#video-05">#05 戒奶茶後喝這個</a>
-  <a href="#video-06">#06 比奶茶會放鬆</a>
-  <div style="margin: 12px 0 6px; font-size: 11px; opacity: 0.6; letter-spacing: 0.05em;">W3 信任週</div>
-  <a href="#video-07">#07 奶精 vs 鮮乳</a>
-  <a href="#video-08">#08 鮮奶茶喝不出層次</a>
-  <a href="#video-09">#09 三個標準</a>
-  <div style="margin: 12px 0 6px; font-size: 11px; opacity: 0.6; letter-spacing: 0.05em;">W4 收網週</div>
-  <a href="#video-10">#10 賣最久不是奶茶</a>
-  <a href="#video-11">#11 為什麼叫『大人』</a>
-  <a href="#video-12">#12 奶茶犒賞 vs 日常</a>
+  <details id="nav-toc">
+    <summary>
+      <span class="toc-label">目錄｜12 支</span>
+      <span class="toc-hint">W1 立旗 · W2 圈粉 · W3 信任 · W4 收網</span>
+      <span class="toc-arrow">▾</span>
+    </summary>
+    <div class="nav-body">
+      <div class="week-row">
+        <div class="week-label">W1 立旗週</div>
+        <div class="week-links">
+          <a href="#video-01">#01 跟拿鐵根本一樣吧？</a>
+          <a href="#video-02">#02 戒奶茶 30 天</a>
+          <a href="#video-03">#03 在日本當外人的那個我</a>
+        </div>
+      </div>
+      <div class="week-row">
+        <div class="week-label">W2 圈粉週</div>
+        <div class="week-links">
+          <a href="#video-04">#04 比鮮奶茶適合早餐</a>
+          <a href="#video-05">#05 戒奶茶後喝這個</a>
+          <a href="#video-06">#06 比奶茶會放鬆</a>
+        </div>
+      </div>
+      <div class="week-row">
+        <div class="week-label">W3 信任週</div>
+        <div class="week-links">
+          <a href="#video-07">#07 奶精 vs 鮮乳</a>
+          <a href="#video-08">#08 鮮奶茶喝不出層次</a>
+          <a href="#video-09">#09 三個標準</a>
+        </div>
+      </div>
+      <div class="week-row">
+        <div class="week-label">W4 收網週</div>
+        <div class="week-links">
+          <a href="#video-10">#10 賣最久不是奶茶</a>
+          <a href="#video-11">#11 為什麼叫『大人』</a>
+          <a href="#video-12">#12 奶茶犒賞 vs 日常</a>
+        </div>
+      </div>
+    </div>
+  </details>
 </nav>
 
 <div class="container">
@@ -1282,6 +1371,14 @@
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('active');
   });
+
+  // Auto-close nav details after click
+  const navToc = document.getElementById('nav-toc');
+  if (navToc) {
+    navToc.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => navToc.removeAttribute('open'));
+    });
+  }
 </script>
 
 </body>
